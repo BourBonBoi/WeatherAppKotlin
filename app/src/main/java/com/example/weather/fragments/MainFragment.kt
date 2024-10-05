@@ -161,7 +161,7 @@ class MainFragment : Fragment() {
                 city +
                 "&days=" +
                 "3" +
-                "&aqi=no&alerts=no"
+                "&aqi=no&alerts=no&lang=en"
 
         val queue = Volley.newRequestQueue(context)
         val request = StringRequest(
@@ -209,10 +209,15 @@ class MainFragment : Fragment() {
         return list
     }
 
-    private fun parseCurrentData(mainObject: JSONObject, weatherItem: WeatherModel){
+    private fun parseCurrentData(mainObject: JSONObject, weatherItem: WeatherModel) {
+        val cityName = mainObject.getJSONObject("location").getString("name")
+        Log.d("MyLog", "City name from JSON: $cityName") // Для проверки
+
+        // Проверяем и при необходимости перекодируем
+        val encodedCityName = String(cityName.toByteArray(Charsets.ISO_8859_1), Charsets.UTF_8)
 
         val item = WeatherModel(
-            mainObject.getJSONObject("location").getString("name"),
+            encodedCityName,
             mainObject.getJSONObject("current").getString("last_updated"),
             mainObject.getJSONObject("current")
                 .getJSONObject("condition").getString("text"),
@@ -223,11 +228,7 @@ class MainFragment : Fragment() {
                 .getJSONObject("condition").getString("icon"),
             weatherItem.hours
         )
-        
         model.liveDataCurrent.value = item
-        Log.d("MyLog", "City: ${item.maxTemp}")
-        Log.d("MyLog", "Time: ${item.minTemp}")
-        Log.d("MyLog", "Time: ${item.hours}")
     }
 
     companion object {
