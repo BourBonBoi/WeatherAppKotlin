@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.gms.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -53,4 +54,6 @@ dependencies {
     implementation(libs.volley)
     implementation(libs.picasso)
     implementation("androidx.fragment:fragment-ktx:1.8.4")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+
 }
