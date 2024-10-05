@@ -51,4 +51,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.volley)
+    implementation(libs.picasso)
+    implementation("androidx.fragment:fragment-ktx:1.8.4")
 }
